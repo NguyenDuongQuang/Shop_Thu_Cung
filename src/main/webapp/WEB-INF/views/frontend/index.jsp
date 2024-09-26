@@ -6,17 +6,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title }</title>
+    <title>${title}</title>
+    <!-- Fonts -->
+    <!-- Jquery -->
     
-    <%-- CSS --%>
-	<jsp:include page="/WEB-INF/views/frontend/layout/css.jsp"></jsp:include>
+   <!-- CSS -->
+   <jsp:include page="/WEB-INF/views/frontend/layout/css.jsp"></jsp:include>
+
 </head>
 
 <body>
     <div class="wrapper">
-        <%-- header --%>
-        <jsp:include page="/WEB-INF/views/frontend/layout/header.jsp"></jsp:include>
-        
+ <jsp:include page="/WEB-INF/views/frontend/layout/header.jsp"></jsp:include>
         <main class="main">
             <div class="main__products-hot">
                 <div class="container">
@@ -28,7 +29,7 @@
                             <div class="col-12 col-lg-3 col-md-6">
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
+                                        <a href="${root }/product" class="image">
                                             <img src="${root }/frontend/img/products/1.jpg" class="fit-img zoom-img">
                                         </a>
                                         <span class="badges">
@@ -36,7 +37,7 @@
                                         </span>
                                     </div>
                                     <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
+                                        <a href="${root }/product" class="content-link">
                                             <h5 class="title">Chó mèo</h5>
                                         </a>
                                         <span class="price">
@@ -53,7 +54,7 @@
                             <div class="col-12 col-lg-3 col-md-6">
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
+                                        <a href="${root }/product" class="image">
                                             <img src="${root }/frontend/img/products/4.jpg" class="fit-img zoom-img">
                                         </a>
                                         <span class="badges">
@@ -61,7 +62,7 @@
                                         </span>
                                     </div>
                                     <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
+                                        <a href="${root }/product" class="content-link">
                                             <h5 class="title">Chó mèo</h5>
                                         </a>
                                         <span class="price">
@@ -78,7 +79,7 @@
                             <div class="col-12 col-lg-3 col-md-6">
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
+                                        <a href="${root }/product" class="image">
                                             <img src="${root }/frontend/img/products/2.jpeg" class="fit-img zoom-img">
                                         </a>
                                         <span class="badges">
@@ -86,7 +87,7 @@
                                         </span>
                                     </div>
                                     <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
+                                        <a href="${root }/product" class="content-link">
                                             <h5 class="title">Chó mèo</h5>
                                         </a>
                                         <span class="price">
@@ -103,7 +104,7 @@
                             <div class="col-12 col-lg-3 col-md-6">
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
+                                        <a href="${root }/product" class="image">
                                             <img src="${root }/frontend/img/products/7.jpg" class="fit-img zoom-img">
                                         </a>
                                         <span class="badges">
@@ -111,7 +112,7 @@
                                         </span>
                                     </div>
                                     <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
+                                        <a href="${root }/product" class="content-link">
                                             <h5 class="title">Chó mèo</h5>
                                         </a>
                                         <span class="price">
@@ -709,17 +710,71 @@
                 </div>
             </div>
         </main>
-        
-        <%--footer --%>
-        <jsp:include page="/WEB-INF/views/frontend/layout/footer.jsp"></jsp:include>
-        
+         <jsp:include page="/WEB-INF/views/frontend/layout/footer.jsp"></jsp:include>
         <div class="scroll__top">
             <i class='bx bx-up-arrow-alt'></i>
         </div>
-    </div>
-    <%-- JS --%>
-    <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
 
+        <!-- mobile menu -->
+        <div class="mobile__menu-wrapper">
+            <div class="mobile__menu-body">
+                <div class="mobile__btn-close">
+                    <i class='bx bx-x'></i>
+                </div>
+                <div class="mobile__content">
+                    <div class="mobile__search-box">
+                        <form>
+                            <input type="text" placeholder="Tìm kiếm..." class="mobile__search-input">
+                            <button class="mobile__search-btn">
+                                <i class='bx bx-search'></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="mobile__navigation">
+                        <ul class="mobile__nav">
+                            <li class="mobile__children"><a href="${root }/frontend/index.html" class="mobile__link">Trang chủ</li>
+                            <li class="mobile__children">
+                                <a href="#" class="mobile__link">Thú cưng
+                                    <i class='bx bx-chevron-down'></i>
+                                </a>
+                                <ul class="mobile__submenu">
+                                    <li class="mobile__submenu-item"><a href="${root }/frontend/danhmuc.html"
+                                            class="mobile__submenu-link">Chó
+                                            Corgi</a></li>
+                                    <li class="mobile__submenu-item"><a href="${root }/frontend/danhmuc.html"
+                                            class="mobile__submenu-link">Chó
+                                            Beagle</a></li>
+                                    <li class="mobile__submenu-item"><a href="${root }/frontend/danhmuc.html"
+                                            class="mobile__submenu-link">Chó Alaska
+                                            Malamute</a></li>
+                                    <li class="mobile__submenu-item"><a href="${root }/frontend/danhmuc.html"
+                                            class="mobile__submenu-link">Chó Golden
+                                            Retriever</a></li>
+                                    <li class="mobile__submenu-item"><a href="${root }/frontend/danhmuc.html"
+                                            class="mobile__submenu-link"> Chó Husky
+                                            Siberian</a></li>
+                                </ul>
+                            </li>
+                            <li class="mobile__children"><a href="#" class="mobile__link">Phụ kiện</a></li>
+                            <li class="mobile__children">
+                                <a href="#" class="mobile__link">Dịch vụ <i class='bx bx-chevron-down'></i></a>
+                                <ul class="mobile__submenu">
+                                    <li class="mobile__submenu-item"><a href="#" class="mobile__submenu-link">Spa</a>
+                                    </li>
+                                    <li class="mobile__submenu-item"><a href="#" class="mobile__submenu-link">Chăm sóc
+                                            thú cưng</a></li>
+                                </ul>
+                            </li>
+                            <li class="mobile__children"><a href="${root }/frontend/lienhe.html" class="mobile__link">Liên hệ </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Slider -->
+    
+    <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
 </body>
 
 </html>
