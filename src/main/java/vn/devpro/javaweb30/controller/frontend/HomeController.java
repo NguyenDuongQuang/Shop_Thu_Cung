@@ -9,9 +9,19 @@ import vn.devpro.javaweb30.controller.BaseController;
 @Controller
 public class HomeController extends BaseController {
 	
-	@RequestMapping(value = "/index", method  = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String viewHomePage() {
 		return "frontend/index";
+	}
+	
+	@RequestMapping(value = "/category", method = RequestMethod.GET)
+	public String viewCategoryPage() {
+		return "frontend/category";
+	}
+	
+	@RequestMapping(value = "/product", method = RequestMethod.GET)
+	public String viewProductPage() {
+		return "frontend/product";
 	}
 
 }

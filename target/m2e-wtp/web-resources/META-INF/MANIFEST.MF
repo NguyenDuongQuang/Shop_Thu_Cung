@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: Quang
-Build-Jdk: 22.0.1
+Built-By: Minh Ant
+Build-Jdk: 11.0.16.1
 Implementation-Title: javaweb30 Maven Webapp
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: vn.devpro
