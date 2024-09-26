@@ -8,7 +8,7 @@ public class BaseController {
 	
 	@ModelAttribute("title")
 	public String title() {
-		return "Shop Bán Thú Cưng";
+		return "Javaweb-30";
 	}
 
 }
