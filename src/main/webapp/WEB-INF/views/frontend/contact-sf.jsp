@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,41 +34,47 @@
                                 
                             </div>
                             <div class="contact__form">
-                                <form class="form" action="/contact/save-edit" method="POST">
+                                <sf:form class="form" action="/contact/save-sf" method="POST" modelAttribute="contact" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="text" class="form-input" name="name"  id="name" value="${contact.name }">
+                                                <sf:input type="text" class="form-input" path="name"  id="name" ></sf:input>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="email" class="form-input" name="email" id="email" value="${contact.email }">
+                                                <sf:input type="email" class="form-input" path="email" id="email" ></sf:input>
                                             </div>
                                         </div>
                                          <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="mobile" class="form-input" name="mobile" id="mobile" value="${contact.mobile }">
+                                                <sf:input type="mobile" class="form-input" path="mobile" id="mobile" ></sf:input>
                                             </div>
                                         </div>
                                          <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="address" class="form-input" name="address" id="address" value="${contact.address }">
+                                                <sf:input type="address" class="form-input" path="address" id="address"></sf:input>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="contact__form-input">
-                                                <textarea cols="30" rows="5" class="form__textarea" id="message" name="message"
-                                                    placeholder="Message">${contact.message }</textarea>
+                                                <sf:textarea cols="30" rows="5" class="form__textarea" id="message" path="message"
+                                                    placeholder="Message"></sf:textarea>
                                             </div>
+                                        </div>
+                                        <div class="col-12">                                             
+	                                        <div class="contact__form-input">                                                 
+	                                       	 	<label for="uploadFile">Choose file to upload</label>                                         
+	                                        	<input type="file" id="contactFile" name="contactFile" class="form-control-file" multiple="multiple" >          
+	                                        </div>                                         
                                         </div>
                                         <div class="col-12">
                                             <div class="contact__btn">
-                                                <button type="button" id="save_record" onclick="_notification()" class="btn btn-primary">Save</button>
+                                                <button type="submit" id="save_record"  class="btn btn-primary">Save</button>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </sf:form>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6">
@@ -106,31 +114,7 @@
     <!-- Slider -->
     <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
 
-<script type="text/javascript">   
-	function _notification() {  
-		//javascript object   
-		let data = {          
-				name : jQuery("#name").val(),    
-				email : jQuery("#email").val(), //Get by Id     
-				mobile : jQuery("#mobile").val(),     
-				address : jQuery("#address").val(),    
-				message : jQuery("#message").val(),        
-				};        //$ === jQuery    
-				jQuery.ajax({     
-					url : "/contact/save-edit",     
-					type : "POST",     
-					contentType: "application/json",     
-					data : JSON.stringify(data),     
-					dataType : "json", //Kieu du lieu tra ve tu controller la json          
-					success : function(jsonResult) {      
-						alert(jsonResult.code + ": " + jsonResult.message);   
-						// $("#notification").html(jsonResult.message);     },   
-						error : function(jqXhr, textStatus, errorMessage) { 
-							alert("An error occur");    
-						}  
-			});  
-	} 
-</script>
+
 
 </body>
 
