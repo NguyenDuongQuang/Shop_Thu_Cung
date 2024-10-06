@@ -17,47 +17,45 @@ public abstract class BaseService<Model extends BaseModel> {
 
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	public abstract Class<Model> clazz();
-	
-	//Lay mot ban ghi theo id
+
+	// Lay mot ban ghi theo id
 	public Model getById(int id) {
 		return entityManager.find(clazz(), id);
 	}
-	
-	//Lay tat ca cac ban ghi trong mot table
+
+	// Lay tat ca cac ban ghi trong mot table
 	@SuppressWarnings("unchecked")
 	public List<Model> findAll() {
 		Table table = clazz().getAnnotation(Table.class);
-		return (List<Model>) entityManager.createNativeQuery(
-				"SELECT * FROM " + table.name(), 
-				clazz()).getResultList();
+		return (List<Model>) entityManager.createNativeQuery("SELECT * FROM " + table.name(), clazz()).getResultList();
 	}
-	
-	//Them moi hoac sua mot ban ghi
+
+	// Them moi hoac sua mot ban ghi
 	@Transactional
 	public Model saveOrUpdate(Model entity) {
-		if (entity.getId() == null || entity.getId() <= 0) { //Add new entity
+		if (entity.getId() == null || entity.getId() <= 0) { // Add new entity
 			entityManager.persist(entity);
 			return entity;
-		}
-		else { //update entity
+		} else { // update entity
 			return entityManager.merge(entity);
 		}
 	}
-	
-	//Xoa 1 ban ghi theo entity
+
+	// Xoa 1 ban ghi theo entity
 	@Transactional
 	public void delete(Model entity) {
-		entityManager.remove(entity);	
+		entityManager.remove(entity);
 	}
-	//Delete theo id
+
+	// Delete theo id
 	@Transactional
 	public void deleteById(int id) {
 		Model entity = this.getById(id);
 		delete(entity);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Model> executeNativeSql(String sql) {
 		try {

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 public class MvcConfigurer implements WebMvcConfigurer {
-	
+
 	@Bean
 	public ViewResolver viewResolver() {
 		// Xu ly va tra ve doi tuong view thong qua ten
@@ -20,7 +20,7 @@ public class MvcConfigurer implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		return bean;
 	}
-	
+
 	// Dang ky thu muc chua resource file (css, js, img, ...)
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

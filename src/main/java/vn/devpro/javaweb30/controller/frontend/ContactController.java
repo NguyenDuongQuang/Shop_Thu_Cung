@@ -138,7 +138,7 @@ public class ContactController extends BaseController {
 		}
 		return "redirect:view-sf";
 	}
-	
+
 //	@RequestMapping(value = "save-edit-sf", method = RequestMethod.POST)
 //	public String saveEditContactPageSf(final Model model, @ModelAttribute("contact") Contact contact,
 //	        @RequestParam("contactFile") MultipartFile file) throws IOException {
@@ -175,6 +175,5 @@ public class ContactController extends BaseController {
 //
 //	    return "redirect:view-sf";
 //	}
-
 
 }
