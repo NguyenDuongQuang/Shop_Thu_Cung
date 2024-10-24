@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${root}/backend/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${root }/backend/assets/images/favicon.png">
     <title>${title }</title>
     
     <!-- variables -->
@@ -110,7 +110,7 @@
                                	<div class="row">
                        		 		<div class="col-md-6">
 										<div class="form-group mb-4">
-	                                        <a href="${root}/admin/category/add" role="button" class="btn btn-primary">Add New Category</a>
+	                                        <a href="${root }/admin/category/add" role="button" class="btn btn-primary">Add New Category</a>
                                       	</div>
                                    	</div>
 									
@@ -172,9 +172,9 @@
 		                                        		</td>
 	                                        		<td>${category.description }</td>
 	                                        		<td>
-	                                        			<a href="${root}/admin/category/edit/${category.id }" role="button" 
+	                                        			<a href="${root }/admin/category/edit/${category.id }" role="button" 
 	                                                							class="btn btn-primary">Edit</a>
-	                                                	<a href="${root}/admin/category/delete/${category.id }" role="button" 
+	                                                	<a href="${root }/admin/category/delete/${category.id }" role="button" 
 	                                                							class="btn btn-secondary">Delete</a>
 	                                        		</td>
                                         		</tr>

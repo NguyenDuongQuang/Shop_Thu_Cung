@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${root}/backend/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${root }/backend/assets/images/favicon.png">
     <title>${title }</title>
     
     <!-- variables -->
@@ -22,16 +22,11 @@
     
     <!-- Custome css resource file -->
     <jsp:include page="/WEB-INF/views/backend/layout/css.jsp"></jsp:include>
+    
 </head>
 
 <body>
 	
-	
-	<!-- End test -->
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -54,7 +49,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h2 class="page-title text-truncate text-dark font-weight-medium mb-1">List User</h2>
+                        <h2 class="page-title text-truncate text-dark font-weight-medium mb-1">List Role</h2>
                     </div>
                 </div>
             </div>
@@ -73,12 +68,51 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <div class="card card-hover">
+                                            <div class="p-2 bg-primary text-center">
+                                                <h1 class="font-light text-white">2,064</h1>
+                                                <h6 class="text-white">Total Tickets</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <div class="card card-hover">
+                                            <div class="p-2 bg-cyan text-center">
+                                                <h1 class="font-light text-white">1,738</h1>
+                                                <h6 class="text-white">Responded</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <div class="card card-hover">
+                                            <div class="p-2 bg-success text-center">
+                                                <h1 class="font-light text-white">1100</h1>
+                                                <h6 class="text-white">Resolve</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <div class="card card-hover">
+                                            <div class="p-2 bg-danger text-center">
+                                                <h1 class="font-light text-white">964</h1>
+                                                <h6 class="text-white">Pending</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
                                 <div class="table-responsive">
                                 	
                                	<div class="row">
                        		 		<div class="col-md-6">
 										<div class="form-group mb-4">
-	                                        <a href="${root}/admin/user/add" role="button" class="btn btn-primary">Add New User</a>
+	                                        <a href="${root }/admin/role/add" role="button" class="btn btn-primary">Add New Role</a>
                                       	</div>
                                    	</div>
 									
@@ -104,57 +138,36 @@
                                             <tr>
                                             	<th scope="col">No.</th>
                                                 <th scope="col">Id</th>
-                                                <th scope="col">Username</th>
-                                                <th scope="col">Password</th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Mobile</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Address</th>
                                                 <th scope="col">Create by</th>
                                                 <th scope="col">Update by</th>
                                                 <th scope="col">Create date</th>
                                                 <th scope="col">Update date</th>
-                                                <th scope="col">Status</th> 
-                                                <th scope="col">Description</th>    
-                                                <th scope="col">Action</th>                                           
+                                                <th scope="col">Status</th>  
+                                                <th scope="col">Description</th> 
+                                                <th scope="col">Action</th>                                             
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach var="user" items="${users }" varStatus="loop">
+                                        	<c:forEach var="role" items="${roles }" varStatus="loop">
                                         		<tr>
 		                                        	<td>${loop.index + 1 }</td>
-		                                        	<td>${user.id }</td>
-		                                        	<td>${user.username }</td>
-		                                        	<td>${user.password }</td>
-		                                        	<td>${user.name }</td>
-		                                        	<td>${user.mobile }</td>
-		                                        	<td>${user.email }</td>
-		                                        	<td>${user.address }</td>
-		                                        	<td>${user.userCreateUser.username }</td>
-		                                        	<td>${user.userUpdateUser.username }</td>
+		                                        	<td>${role.id }</td>
+		                                        	<td>${role.name }</td>
+		                                        	<td>${role.userCreateRole.username }</td>
+		                                        	<td>${role.userUpdateRole.username }</td>
 		                                        	<td>
-		                                        		<fmt:formatDate value="${user.createDate }" pattern="dd-MM-yyyy"/>
+		                                        		<fmt:formatDate value="${role.createDate }" pattern="dd-MM-yyyy"/>
 		                                        	</td>
 		                                        	<td>
-		                                        		<fmt:formatDate value="${user.updateDate }" pattern="dd-MM-yyyy"/>
+		                                        		<fmt:formatDate value="${role.updateDate }" pattern="dd-MM-yyyy"/>
 		                                        	</td>
-		                                        	<td>
-		                                        		<span id="_user_status_${user.id }">
-	                                                		<c:choose>
-	                                                			<c:when test="${user.status }">
-	                                                				<span>Active</span>
-	                                                			</c:when>
-	                                                			<c:otherwise>
-	                                                				<span>Inactive</span>
-	                                                			</c:otherwise>
-	                                                		</c:choose>
-	                                                	</span>
-		                                        	</td>
-		                                        	<td>${user.description }</td>
+		                                        	<td>${role.status }</td>
+	                                        		<td>${role.description }</td>
 	                                        		<td>
-	                                        			<a href="${root}/admin/user/edit/${user.id }" role="button" 
+	                                        			<a href="${root }/admin/role/edit/${role.id }" role="button" 
 	                                                							class="btn btn-primary">Edit</a>
-	                                                	<a href="${root}/admin/user/delete/${user.id }" role="button" 
+	                                                	<a href="${root }/admin/role/delete/${role.id }" role="button" 
 	                                                							class="btn btn-secondary">Delete</a>
 	                                        		</td>
                                         		</tr>
@@ -164,19 +177,14 @@
                                             <tr>
                                             	<th scope="col">No.</th>
                                                 <th scope="col">Id</th>
-                                                <th scope="col">User name</th>
-                                                <th scope="col">Password</th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Mobile</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Address</th>
                                                 <th scope="col">Create by</th>
                                                 <th scope="col">Update by</th>
                                                 <th scope="col">Create date</th>
                                                 <th scope="col">Update date</th>
-                                                <th scope="col">Status</th> 
-                                                <th scope="col">Description</th>    
-                                                <th scope="col">Action</th>    
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Action</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -184,7 +192,7 @@
                                     <div class="row">
 	                        		 		<div class="col-md-6">
 												<div class="form-group mb-4">
-			                                        <a href="${classpath }/admin/user/add" role="button" class="btn btn-primary">Add New User</a>
+			                                        <a href="${root }/admin/role/add" role="button" class="btn btn-primary">Add New Role</a>
                                         		</div>
 	                                    	</div>
 										

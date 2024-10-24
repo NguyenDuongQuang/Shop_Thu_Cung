@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class BaseController {
-
+	
 	@ModelAttribute("title")
 	public String title() {
-		return "Javaweb-30";
+		return "Shop Bán Thú Cưng";
 	}
 
 }

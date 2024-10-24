@@ -8,9 +8,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@Configuration
-public class MvcConfigurer implements WebMvcConfigurer {
+import vn.devpro.javaweb30.dto.Jw30Contant;
 
+@Configuration
+public class MvcConfigurer implements WebMvcConfigurer,Jw30Contant {
+	
 	@Bean
 	public ViewResolver viewResolver() {
 		// Xu ly va tra ve doi tuong view thong qua ten
@@ -20,13 +22,13 @@ public class MvcConfigurer implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		return bean;
 	}
-
+	
 	// Dang ky thu muc chua resource file (css, js, img, ...)
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/frontend/**").addResourceLocations("classpath:/frontend/");
 		registry.addResourceHandler("/backend/**").addResourceLocations("classpath:/backend/");
-//		registry.addResourceHandler("/UploadFiles/**").addResourceLocations("file:" + FOLDER_UPLOAD);
+		registry.addResourceHandler("/UploadFiles/**").addResourceLocations("file:" + FOLDER_UPLOAD);
 	}
 
 }

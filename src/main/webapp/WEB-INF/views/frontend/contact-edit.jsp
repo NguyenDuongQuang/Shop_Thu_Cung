@@ -29,40 +29,49 @@
                         <div class="col-12 col-lg-6">
                             <div class="contact__title">
                                 <h2 class="title">Liên lạc</h2>
-                                
+                                <h2 class="title">
+                                	<span id="notification"></span>
+                                </h2>
                             </div>
                             <div class="contact__form">
                                 <form class="form" action="/contact/save-edit" method="POST">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="text" class="form-input" name="name"  id="name" value="${contact.name }">
+                                                <input type="text" class="form-input" id="name"
+                                                	name="name" value="${contact.name }">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="email" class="form-input" name="email" id="email" value="${contact.email }">
+                                                <input type="email" class="form-input" id="email"
+                                                	name="email" value="${contact.email }">
                                             </div>
                                         </div>
-                                         <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="mobile" class="form-input" name="mobile" id="mobile" value="${contact.mobile }">
+                                                <input type="text" class="form-input" id="mobile"
+                                                	name="mobile" value="${contact.mobile }">
                                             </div>
                                         </div>
-                                         <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <input type="address" class="form-input" name="address" id="address" value="${contact.address }">
+                                                <input type="text" class="form-input" id = "address"
+                                                	name="address" value="${contact.address }">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="contact__form-input">
-                                                <textarea cols="30" rows="5" class="form__textarea" id="message" name="message"
+                                                <textarea cols="30" rows="5" class="form__textarea" 
+                                                	id = "message" name="message"
                                                     placeholder="Message">${contact.message }</textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="contact__btn">
-                                                <button type="button" id="save_record" onclick="_notification()" class="btn btn-primary">Save</button>
+                                                <%--button type="submit" class="btn btn-primary">Save</button> --%>
+                                                <button type="button" class="btn btn-primary"
+                                                	onclick="_notification()">Save</button>
                                             </div>
                                         </div>
                                     </div>
@@ -106,32 +115,38 @@
     <!-- Slider -->
     <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
 
-<script type="text/javascript">   
-	function _notification() {  
-		//javascript object   
-		let data = {          
-				name : jQuery("#name").val(),    
-				email : jQuery("#email").val(), //Get by Id     
-				mobile : jQuery("#mobile").val(),     
-				address : jQuery("#address").val(),    
-				message : jQuery("#message").val(),        
-				};        //$ === jQuery    
-				jQuery.ajax({     
-					url : "/contact/save-edit",     
-					type : "POST",     
-					contentType: "application/json",     
-					data : JSON.stringify(data),     
-					dataType : "json", //Kieu du lieu tra ve tu controller la json          
-					success : function(jsonResult) {      
-						alert(jsonResult.code + ": " + jsonResult.message);   
-						// $("#notification").html(jsonResult.message);     },   
-						error : function(jqXhr, textStatus, errorMessage) { 
-							alert("An error occur");    
-						}  
-			});  
-	} 
-</script>
-
+	<script type="text/javascript">
+		function _notification() {
+			//javascript object: lấy dl từ các ô input của form
+			let data = {
+				
+				name : jQuery("#name").val(),
+				email : jQuery("#email").val(), //Get by Id
+				mobile : jQuery("#mobile").val(),
+				address : jQuery("#address").val(),
+				message : jQuery("#message").val(),
+				
+			};
+			
+			//$ === jQuery
+			jQuery.ajax({
+				url : "/contact/save-edit",
+				type : "POST",
+				contentType: "application/json",
+				data : JSON.stringify(data),
+				dataType : "json", //Kieu du lieu tra ve tu controller la json
+				
+				success : function(jsonResult) {
+					//alert(jsonResult.code + ": " + jsonResult.message);
+					$("#notification").html(jsonResult.message);
+				},
+				
+				error : function(jqXhr, textStatus, errorMessage) {
+					alert("An error occur");
+				}
+			});
+		}
+	</script>
 </body>
 
 </html>

@@ -16,7 +16,7 @@
 <meta name="author" content="">
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
-	href="${root}/backend/assets/images/favicon.png">
+	href="${root }/backend/assets/images/favicon.png">
 <title>${title }</title>
 
 <!-- variables -->
@@ -75,19 +75,19 @@
 						<div class="card">
 
 							<div class="card-body">
-								<form action="${root}/admin/product/view" method="get">
+								<form action="${root }/admin/product/view" method="get">
 									<div class="table-responsive">
 
 										<div class="row">
 											<div class="col-md-2">
 												<div class="form-group mb-4">
-													<a href="${root}/admin/product/add" role="button"
+													<a href="${root }/admin/product/add" role="button"
 														class="btn btn-primary">Add new product</a>
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group mb-4">
-													<h3>Total products: &nbsp ${productSearch.totalItems }</h3>
+													<h3>Total products: &nbsp ${searchModel.totalItems }</h3>
 												</div>
 											</div>
 
@@ -95,7 +95,7 @@
 												<div class="form-group mb-4">
 													<label>Current page</label> <input id="currentPage"
 														name="currentPage" class="form-control"
-														value="${productSearch.currentPage }">
+														value="${searchModel.currentPage }">
 												</div>
 											</div>
 
@@ -186,7 +186,7 @@
 														<td align="right">${product.salePrice }</td>
 
 														<td><img width="40px" height="40px"
-															src="${root}/UploadFiles/${product.avatar }"
+															src="${root }/UploadFiles/${product.avatar }"
 															class="light-logo"></td>
 
 														<td>${product.shortDescription }</td>
@@ -220,9 +220,9 @@
 														</span></td>
 														<td>${product.seo }</td>
 														<td><a
-															href="${root}/admin/product/edit/${product.id }"
+															href="${root }/admin/product/edit/${product.id }"
 															role="button" class="btn btn-primary">Edit</a> <a
-															href="${root}/admin/product/delete/${product.id }"
+															href="${root }/admin/product/delete/${product.id }"
 															role="button" class="btn btn-secondary">Delete</a></td>
 													</tr>
 												</c:forEach>
@@ -253,7 +253,7 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group mb-4">
-													<a href="${root}/admin/product/add" role="button"
+													<a href="${root }/admin/product/add" role="button"
 														class="btn btn-primary">Add new product</a>
 												</div>
 											</div>
@@ -297,18 +297,18 @@
 	<script type="text/javascript">
 		$( document ).ready(function() {
 			//Dat gia tri cua status ung voi dieu kien search truoc do
-			$("#status").val(${productSearch.status});
+			$("#status").val(${searchModel.status});
 			//Dat gia tri cua category ung voi dieu kien search truoc do
-			$("#categoryId").val(${productSearch.categoryId});
+			$("#categoryId").val(${searchModel.categoryId});
 			//Dat gia tri cua keyword ung voi dieu kien search truoc do
-			$("#keyword").val('${productSearch.keyword}');	
-			$("#beginDate").val('${productSearch.beginDate}');
-			$("#endDate").val('${productSearch.endDate}');
+			$("#keyword").val('${searchModel.keyword}');	
+			$("#beginDate").val('${searchModel.beginDate}');
+			$("#endDate").val('${searchModel.endDate}');
 			
 			$("#paging").pagination({
-				currentPage: ${productSearch.currentPage}, //Trang hien tai
-				items: ${productSearch.totalItems}, //Tong so san pham (total products)
-				itemsOnPage: ${productSearch.sizeOfPage},
+				currentPage: ${searchModel.currentPage}, //Trang hien tai
+				items: ${searchModel.totalItems}, //Tong so san pham (total products)
+				itemsOnPage: ${searchModel.sizeOfPage},
 				cssStyle: 'light-theme',
 				onPageClick: function(pageNumber, event) {
 					$('#currentPage').val(pageNumber);

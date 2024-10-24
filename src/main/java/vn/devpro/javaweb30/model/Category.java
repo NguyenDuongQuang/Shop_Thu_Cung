@@ -1,55 +1,60 @@
 package vn.devpro.javaweb30.model;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_category")
 public class Category extends BaseModel {
-
-	@Column(name = "name", length = 300, nullable = true)
+	
+	@Column(name = "name", length = 300, nullable = false)
 	private String name;
-
-	@Column(name = "description", length = 300, nullable = true)
+	
+	@Column(name = "description", length = 500, nullable = true)
 	private String description;
-
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "category")
+	private List<Product> products = new ArrayList<Product>();
+	
+	public void addRelationalProduct(Product product) {
+		products.add(product);
+		product.setCategory(this);
+	}
+	
+	public void removeRelationalProduct(Product product) {
+		products.remove(product);
+		product.setCategory(null);
+	}
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "create_by", referencedColumnName = "id")
+	@JoinColumn(name = "create_by")
 	private User userCreateCategory;
-
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "update_by", referencedColumnName = "id")
+	@JoinColumn(name = "update_by")
 	private User userUpdateCategory;
 
 	public Category() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Category(Integer id, Date create_date, Date update_date, Boolean status) {
-		super(id, create_date, update_date, status);
-		// TODO Auto-generated constructor stub
-	}
-
-	public User getUserCreateCategory() {
-		return userCreateCategory;
-	}
-
-	public void setUserCreateCategory(User userCreateCategory) {
+	public Category(Integer id, Date createDate, Date updateDate, Boolean status, String name, String description,
+			List<Product> products, User userCreateCategory, User userUpdateCategory) {
+		super(id, createDate, updateDate, status);
+		this.name = name;
+		this.description = description;
+		this.products = products;
 		this.userCreateCategory = userCreateCategory;
-	}
-
-	public User getUserUpdateCategory() {
-		return userUpdateCategory;
-	}
-
-	public void setUserUpdateCategory(User userUpdateCategory) {
 		this.userUpdateCategory = userUpdateCategory;
 	}
 
@@ -69,12 +74,33 @@ public class Category extends BaseModel {
 		this.description = description;
 	}
 
-	public Category(String name, String description, User userCreateCategory, User userUpdateCategory) {
-		super();
-		this.name = name;
-		this.description = description;
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public User getUserCreateCategory() {
+		return userCreateCategory;
+	}
+
+	public void setUserCreateCategory(User userCreateCategory) {
 		this.userCreateCategory = userCreateCategory;
+	}
+
+	public User getUserUpdateCategory() {
+		return userUpdateCategory;
+	}
+
+	public void setUserUpdateCategory(User userUpdateCategory) {
 		this.userUpdateCategory = userUpdateCategory;
 	}
 
+	
+
+	
+	
+	
 }

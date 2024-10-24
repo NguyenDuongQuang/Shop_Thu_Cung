@@ -1,7 +1,5 @@
 package vn.devpro.javaweb30.model;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,27 +10,31 @@ import javax.persistence.MappedSuperclass;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author MingTu
+ *
+ */
 @MappedSuperclass
 public abstract class BaseModel {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "create_date", nullable = true)
 	private Date createDate;
-
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "update_date", nullable = true)
 	private Date updateDate;
-
+	
 	@Column(name = "status", nullable = true)
 	private Boolean status = Boolean.TRUE;
 
 	public BaseModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BaseModel(Integer id, Date createDate, Date updateDate, Boolean status) {
@@ -50,8 +52,6 @@ public abstract class BaseModel {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 	public Date getCreateDate() {
 		return createDate;
@@ -76,5 +76,6 @@ public abstract class BaseModel {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-
+	
+	
 }

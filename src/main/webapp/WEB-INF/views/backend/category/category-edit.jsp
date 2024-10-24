@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${root}/backend/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${root }/backend/assets/images/favicon.png">
     <title>${title }</title>
     
     <!-- variables -->
@@ -25,18 +25,11 @@
     
     <!-- Custome css resource file -->
     <jsp:include page="/WEB-INF/views/backend/layout/css.jsp"></jsp:include>
-    
-   
+  
 </head>
 
 <body>
-	
-	
-	<!-- End test -->
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    
+
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -59,7 +52,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h2 class="page-title text-truncate text-dark font-weight-medium mb-1">Add new role</h2>
+                        <h2 class="page-title text-truncate text-dark font-weight-medium mb-1">Edit Category</h2>
                     </div>
                 </div>
             </div>
@@ -78,17 +71,17 @@
                 	<div class="col-12">
 	                    <div class="card">
 	                        <div class="card-body">
-	                        	<sf:form class="form" action="${resource }/admin/role/edit-save" method="post" modelAttribute="role" enctype="multipart/form-data">
+	                        	<sf:form class="form" action="${root }/admin/category/edit-save" method="post" modelAttribute="category" enctype="multipart/form-data">
 	                        		 <div class="form-body">
 	                        		 
-	                        		 	<sf:hidden path="id"/> <!-- id > 0 => update -->
+	                        		 	<sf:hidden path="id"/> <!-- id > 0 -> Edit -->
 	                        		 	
 	                        			<div class="row">
 	                                    	
 	                        		 		<div class="col-md-6">
 												<div class="form-group mb-4">
-			                                        <label for="name">Role name</label>
-			                                        <sf:input path="name" type="text" class="form-control" id="name" name="name" placeholder="role name"></sf:input>
+			                                        <label for="name">Category name</label>
+			                                        <sf:input path="name" type="text" class="form-control" id="name" name="name" placeholder="category name"></sf:input>
                                         		</div>
 	                                    	</div>
 										</div>
@@ -96,8 +89,8 @@
 										<div class="row">
 	                        		 		<div class="col-md-6">
 												<div class="form-group mb-4">
-			                                        <label for="role">Create by</label>
-			                                        <sf:select path="userCreateRole.id" class="form-control" id="userCreateRole">
+			                                        <label for="category">Create by</label>
+			                                        <sf:select path="userCreateCategory.id" class="form-control" id="userCreateCategory">
 			                                            <sf:options items="${users }" itemValue="id" itemLabel="username"></sf:options>
 			                                        </sf:select>
                                         		</div>
@@ -105,8 +98,8 @@
 									
 											<div class="col-md-6">
 												<div class="form-group mb-4">
-			                                        <label for="role">Update by</label>
-			                                        <sf:select path="userUpdateRole.id" class="form-control" id="userUpdateRole">
+			                                        <label for="category">Update by</label>
+			                                        <sf:select path="userUpdateCategory.id" class="form-control" id="userUpdateCategory">
 			                                            <sf:options items="${users }" itemValue="id" itemLabel="username"></sf:options>
 			                                        </sf:select>
                                         		</div>
@@ -115,7 +108,7 @@
 										<div class="row">
 	                        		 		<div class="col-md-6">
 												<div class="form-group mb-4">
-			                                        <label for="createdate">Create date</label>
+			                                        <label for="createDate">Create date</label>
 			                                        
 			                                        <sf:input path="createDate" class="form-control" type="date" 
 			                                        			id="createDate" name="createDate"></sf:input>
@@ -124,7 +117,7 @@
 									
 											<div class="col-md-6">
 												<div class="form-group mb-4">
-			                                        <label for="updatedate">Update date</label>
+			                                        <label for="updateDate">Update date</label>
 			                                       
 			                                        <sf:input path="updateDate" class="form-control" type="date" 
 			                                        			id="updateDate" name="updateDate"></sf:input>
@@ -158,10 +151,10 @@
 										<div class="row">
 	                        		 		<div class="col-md-12">
 												<div class="form-group mb-4">
-			                                        <a href="${resource }/admin/role/view" class="btn btn-secondary active" role="button" aria-pressed="true">
+			                                        <a href="${root }/admin/category/view" class="btn btn-secondary active" role="button" aria-pressed="true">
 			                                        	Back to list
 			                                        </a>
-                                    				<button type="submit" class="btn btn-primary">Save role</button>
+                                    				<button type="submit" class="btn btn-primary">Save edit category</button>
                                         		</div>
 	                                    	</div>
 										</div>

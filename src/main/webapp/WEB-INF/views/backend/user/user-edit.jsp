@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${root}/backend/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${root }/backend/assets/images/favicon.png">
     <title>${title }</title>
     
     <!-- variables -->
@@ -78,7 +78,7 @@
                 	<div class="col-12">
 	                    <div class="card">
 	                        <div class="card-body">
-	                        	<sf:form class="form" action="${root}/admin/user/edit-save" method="post" modelAttribute="user" enctype="multipart/form-data">
+	                        	<sf:form class="form" action="${root }/admin/user/edit-save" method="post" modelAttribute="user" enctype="multipart/form-data">
 	                        		 <div class="form-body">
 	                        		 
 	                        		 	<sf:hidden path="id"/> <!-- id > 0 => update -->
@@ -195,7 +195,7 @@
 										<div class="row">
 	                        		 		<div class="col-md-12">
 												<div class="form-group mb-4"> 
-			                                        <a href="${root}/admin/user/view" class="btn btn-secondary active" role="button" aria-pressed="true">
+			                                        <a href="${root }/admin/user/view" class="btn btn-secondary active" role="button" aria-pressed="true">
 			                                        	Back to list
 			                                        </a>
                                     				<button type="submit" class="btn btn-primary">Save user</button>

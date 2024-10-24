@@ -1,6 +1,6 @@
 package vn.devpro.javaweb30.controller.backend;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,75 +21,73 @@ import vn.devpro.javaweb30.service.UserService;
 
 @Controller
 @RequestMapping("/admin/category")
-public class CategoryAdminController extends BaseController {
-
+public class CategoryAdminController extends BaseController{
+	
+	//Khai báo service
 	@Autowired
-	CategoryService categoryService;
-
+	private CategoryService categoryService;
+	
 	@Autowired
-	UserService userService;
-
+	private UserService userService;
+	
 	@RequestMapping(value = "view", method = RequestMethod.GET)
-	public String viewCategory(Model model, HttpServletRequest request) {
-	//	List<Category> categories = categoryService.findAll();
-		List<Category> categories = categoryService.findAllActive();
+	public String view(final Model model, final HttpServletRequest request) {
+		//Lấy dữ liệu từ db để trộn với view trả về cho browser
+		//List<Category> categories = categoryService.findAll();
+		List<Category> categories = categoryService.findAll();
+		//Đẩy dữ liệu sang view
 		model.addAttribute("categories", categories);
-		return "backend/category-list";
+		
+		return "backend/category/category-list";
 	}
-
+	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String viewaddCategory(Model model, HttpServletRequest request) {
+	public String add(final Model model) {
+		//Lấy dữ liệu từ db để trộn với view trả về cho browser
 		List<User> users = userService.findAll();
-
+		//Đẩy dữ liệu sang view
 		Category category = new Category();
-		model.addAttribute("category", category);
-		category.setCreateDate(new java.util.Date());
-		category.setUpdateDate(new java.util.Date());
 		model.addAttribute("users", users);
-
-		return "backend/category-add";
+		//category.setUpdateDate(new Date());
+		
+		model.addAttribute("category", category);
+		
+		return "backend/category/category-add";
 	}
-
+	
 	@RequestMapping(value = "add-save", method = RequestMethod.POST)
-	public String addCategory(Model model, HttpServletRequest request, @ModelAttribute("category") Category category) {
+	public String addSave(@ModelAttribute("category") Category category) {
 		categoryService.saveOrUpdate(category);
-
-		return "backend/category-add";
+		return "redirect:/admin/category/add";
 	}
-
+	
 	@RequestMapping(value = "edit/{categoryId}", method = RequestMethod.GET)
-	public String editCategory(Model model, HttpServletRequest request, @PathVariable int categoryId) {
+	public String edit(final Model model, @PathVariable int categoryId) {
+		//Lấy dữ liệu từ db để trộn với view trả về cho browser
 		List<User> users = userService.findAll();
-
-		Category category = categoryService.getById(categoryId);
-		model.addAttribute("category", category);
-		category.setUpdateDate(new java.util.Date());
+		//Đẩy dữ liệu sang view
 		model.addAttribute("users", users);
-
-		return "backend/category-edit";
-	}
-
-	@RequestMapping(value = "edit-save", method = RequestMethod.POST)
-	public String saveEditCategory(Model model, HttpServletRequest request,
-			@ModelAttribute("category") Category category) {
-
-		categoryService.saveOrUpdate(category);
-
-		return "redirect:/admin/category/view";
-	}
-
-//	@RequestMapping(value = "delete/{categoryId}", method = RequestMethod.GET)
-//	public String deleteCategory(Model model, HttpServletRequest request, @PathVariable int categoryId) {
-//		categoryService.deleteById(categoryId);
-//		return "redirect/admin/category/view";
-//	}
-
-	@RequestMapping(value = "delete/{categoryId}", method = RequestMethod.GET)
-	public String deleteCategory(Model model, HttpServletRequest request, @PathVariable int categoryId) {
+		
 		Category category = categoryService.getById(categoryId);
-		category.setStatus(false);
+		
+		//category.setUpdateDate(new Date());
+		category.setUpdateDate(new Date());
+		model.addAttribute("category", category);
+	
+		
+		return "backend/category/category-edit";
+	}
+	
+	@RequestMapping(value = "edit-save", method = RequestMethod.POST)
+	public String editSave(@ModelAttribute("category") Category category) {
 		categoryService.saveOrUpdate(category);
 		return "redirect:/admin/category/view";
 	}
-
+	
+	@RequestMapping(value = "delete/{categoryId}", method = RequestMethod.GET)
+	public String delete(@PathVariable int categoryId) {
+		categoryService.deleteById(categoryId);
+		
+		return "redirect:/admin/category/view";
+	}
 }

@@ -16,7 +16,7 @@
 	<meta name="author" content="">
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16"
-		href="${root}/admin/assets/images/favicon.png">
+		href="${classpath}/admin/assets/images/favicon.png">
 	<title>${projectTitle }</title>
 	
 	<!-- variables -->

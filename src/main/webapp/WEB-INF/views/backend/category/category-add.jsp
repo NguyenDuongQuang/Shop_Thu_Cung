@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${root}/backend/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${root }/backend/assets/images/favicon.png">
     <title>${title }</title>
     
     <!-- variables -->
@@ -71,7 +71,7 @@
                 	<div class="col-12">
 	                    <div class="card">
 	                        <div class="card-body">
-	                        	<sf:form class="form" action="${root}/admin/category/add-save" method="post" modelAttribute="category" enctype="multipart/form-data">
+	                        	<sf:form class="form" action="${root }/admin/category/add-save" method="post" modelAttribute="category" enctype="multipart/form-data">
 	                        		 <div class="form-body">
 	                        			<div class="row">
 	                                    	
@@ -148,7 +148,7 @@
 										<div class="row">
 	                        		 		<div class="col-md-12">
 												<div class="form-group mb-4">
-			                                        <a href="${root}/admin/category/view" class="btn btn-secondary active" role="button" aria-pressed="true">
+			                                        <a href="${resource  }/admin/category/view" class="btn btn-secondary active" role="button" aria-pressed="true">
 			                                        	Back to list
 			                                        </a>
                                     				<button type="submit" class="btn btn-primary">Save category</button>

@@ -14,17 +14,17 @@
                 <a href="index.html">
                     <b class="logo-icon">
                         <!-- Dark Logo icon -->
-                        <img src="${root}/backend/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                        <img src="${resource }/backend/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                         <!-- Light Logo icon -->
-                        <img src="${root}/backend/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                        <img src="${resource }/backend/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- dark Logo text -->
-                        <img src="${root}/backend/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                        <img src="${resource }/backend/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                         <!-- Light Logo text -->
-                        <img src="${root}/backend/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        <img src="${resource }/backend/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
                     </span>
                 </a>
             </div>
@@ -198,7 +198,7 @@
                                 class="svg-icon mr-2 ml-1"></i>
                             Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="${root}/logout"><i data-feather="power"
+                        <a class="dropdown-item" href="${resource }/logout"><i data-feather="power"
                                 class="svg-icon mr-2 ml-1"></i>
                             Logout</a>
                         <div class="dropdown-divider"></div>

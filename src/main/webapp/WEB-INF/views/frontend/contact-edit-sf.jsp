@@ -21,7 +21,7 @@
                 <div class="container">
                     <div class="bread-crumb">
                         <span><a href="${root }/index">Trang chủ</a></span>
-                        <span><a href="${root }/contact">Liên hệ</a></span>
+                        <span><a href="${root }/contact/view">Liên hệ</a></span>
                     </div>
                 </div>
             </div>
@@ -31,46 +31,57 @@
                         <div class="col-12 col-lg-6">
                             <div class="contact__title">
                                 <h2 class="title">Liên lạc</h2>
-                                
+                                <h2 class="title">
+                                	<span id="notification"></span>
+                                </h2>
                             </div>
                             <div class="contact__form">
-                                <sf:form class="form" action="/contact/save-edit-sf" method="POST" modelAttribute="contact" enctype="multipart/form-data">
+                                <sf:form class="form" action="/contact/save-edit-sf" method="POST" 
+                                			modelAttribute="contact" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <sf:input type="text" class="form-input" path="name"  id="name" ></sf:input>
+                                                <sf:input type="text" class="form-input" path="name" ></sf:input>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <sf:input type="email" class="form-input" path="email" id="email" ></sf:input>
+                                                <sf:input type="email" class="form-input" path="email"
+                                                	name="email"></sf:input>
                                             </div>
                                         </div>
-                                         <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <sf:input type="mobile" class="form-input" path="mobile" id="mobile" ></sf:input>
+                                                <sf:input type="text" class="form-input" path="mobile"
+                                                	name="mobile"></sf:input>
                                             </div>
                                         </div>
-                                         <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="contact__form-input">
-                                                <sf:input type="address" class="form-input" path="address" id="address"></sf:input>
+                                                <sf:input type="text" class="form-input" path = "address"
+                                                	name="address"></sf:input>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="contact__form-input">
-                                                <sf:textarea cols="30" rows="5" class="form__textarea" id="message" path="message"
+                                                <sf:textarea cols="30" rows="5" class="form__textarea" 
+                                                	path = "message" name="message"
                                                     placeholder="Message"></sf:textarea>
                                             </div>
                                         </div>
-                                        <div class="col-12">                                             
-	                                        <div class="contact__form-input">                                                 
-	                                       	 	<label for="uploadFile">Choose file to upload</label>                                         
-	                                        	<input type="file" id="contactFile" name="contactFile" class="form-control-file" multiple="multiple" >          
-	                                        </div>                                         
+                                        
+                                        <div class="col-12">
+                                            <div class="contact__form-input">
+                                                <label for="uploadFile">Choose file to upload</label>
+                                    				<input type="file" id="contactFile" name="contactFile" class="form-control-file" multiple="multiple" >
+                                            </div>
                                         </div>
+                                        
                                         <div class="col-12">
                                             <div class="contact__btn">
-                                                <button type="submit" id="save_record"  class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-primary">Save</button> 
+                                                <%--button type="button" class="btn btn-primary"
+                                                	onclick="_notification()">Save</button>  --%>
                                             </div>
                                         </div>
                                     </div>
@@ -113,8 +124,6 @@
     </div>
     <!-- Slider -->
     <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
-
-
 
 </body>
 

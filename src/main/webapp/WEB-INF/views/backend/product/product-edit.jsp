@@ -18,7 +18,7 @@
 <meta name="author" content="">
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
-	href="${root}/backend/assets/images/favicon.png">
+	href="${root }/backend/assets/images/favicon.png">
 <title>${title }</title>
 <!-- variables -->
 <jsp:include page="/WEB-INF/views/common/variables.jsp"></jsp:include>
@@ -80,7 +80,7 @@
                 	<div class="col-12">
 	                    <div class="card">
 	                        <div class="card-body">
-	                        	<sf:form class="form" action="${root}/admin/product/edit-save" method="post" modelAttribute="product" enctype="multipart/form-data">
+	                        	<sf:form class="form" action="${root }/admin/product/edit-save" method="post" modelAttribute="product" enctype="multipart/form-data">
 	                        		 
 	                        		 <div class="form-body">
 
@@ -250,7 +250,7 @@
 										<div class="row">
 	                        		 		<div class="col-md-12">
 												<div class="form-group mb-4">
-			                                        <a href="${root}/admin/product/view" class="btn btn-secondary active" role="button" aria-pressed="true">
+			                                        <a href="${root }/admin/product/view" class="btn btn-secondary active" role="button" aria-pressed="true">
 			                                        	Back to list
 			                                        </a>
                                     				<button type="submit" class="btn btn-primary">Save edit product</button>
