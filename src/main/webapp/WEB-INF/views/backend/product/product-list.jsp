@@ -98,6 +98,14 @@
 														value="${searchModel.currentPage }">
 												</div>
 											</div>
+											
+											<div class="col-md-6">
+												<div class="form-group mb-4">
+													<label>Total items</label> <input id="totalItems"
+														name="totalItems" class="form-control"
+														value="${searchModel.totalItems }">
+												</div>
+											</div>
 
 										</div>
 										<!-- Tìm kiếm -->
@@ -146,6 +154,13 @@
 
 												<button type="submit" id="btnSearch" name="btnSearch"
 													class="btn btn-primary">Search</button>
+											</div>
+											
+											<div class="col-md-1">
+
+
+												<button type="reset" id="btnClear" name="btnClear"
+													class="btn btn-primary">Clear</button>
 											</div>
 										</div>
 										<!-- Hết tìm kiếm -->

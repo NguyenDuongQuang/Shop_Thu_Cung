@@ -90,8 +90,9 @@
 								class='bx bx-user'></i></a>
 						</div>
 						<div class=" header__bottom-btn header__bottom-cart">
-							<a href="#"><i class='bx bx-cart'></i></a> <span
-								class="header__bottom-num">3</span>
+							<a href="${root }/cart-view"><i class='bx bx-cart'></i></a> 
+							<span
+								class="header__bottom-num" id="totalCartProducts">${totalCartProducts }</span>
 							<div class="header__box-cart">
 								<div class="header__bottom-box-cart">
 									<div class="header__cart-products">
@@ -133,7 +134,7 @@
 										</div>
 									</div>
 									<div class="header__cart-product-buy">
-										<a href="#" class="buy-product">Mua hàng</a>
+										<a href="${root }/cart-view" class="buy-product">Mua hàng</a>
 									</div>
 								</div>
 							</div>

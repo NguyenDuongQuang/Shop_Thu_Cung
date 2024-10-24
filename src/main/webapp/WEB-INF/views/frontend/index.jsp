@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- JSTL directive --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +50,10 @@
                                         </span>
                                         <span class="symbol">
                                             <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
+                                            <!-- <a href="#"><i class='bx bx-cart'></i></a> -->
+                                            <button type="button" onclick="addToCart(${product.id }, 1, '${product.name }')">
+                                            <i class='bx bx-cart'></i>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
@@ -157,11 +165,12 @@
                     </div>
                     <div class="main__products-content">
                         <div class="row">
+                        <c:forEach items="${products }" var = "product">
                             <div class="col-12 col-lg-3 col-md-6">
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/1.jpg" class="fit-img zoom-img">
+                                        <a href="${root }/product/${product.id }" class="image">
+                                            <img src="${root }/UploadFiles/${product.avatar }" class="fit-img zoom-img">
                                         </a>
                                         <span class="badges">
                                             <!-- <span class="sale">-20%</span> -->
@@ -170,298 +179,26 @@
                                         </span>
                                     </div>
                                     <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
+                                        <a href="${root }/product/${product.id }" class="content-link">
+                                            <h5 class="title">${product.name }</h5>
                                         </a>
                                         <span class="price">
-                                            <!-- <span class="old">20.000.000đ</span> -->
-                                            <span class="new">15.000.000đ</span>
+                                            <span class="new">
+                                            <fmt:formatNumber
+																value="${product.price }" minFractionDigits="0">
+											</fmt:formatNumber>đ</span>
                                         </span>
                                         <span class="symbol">
                                             <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
+                                            <!-- <a href="#"><i class='bx bx-cart'></i></a> -->
+                                            <button type="button" onclick="addToCart(${product.id }, 1, '${product.name }')">
+                                            <i class='bx bx-cart'></i>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/1.jpeg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-15%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/8.jpg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/7.jpeg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/5.jpg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/6.jpeg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/4.jpeg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <!-- <span class="sale">-20%</span> -->
-                                            <span class="new">new</span>
-
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <!-- <span class="old">20.000.000đ</span> -->
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/1.jpg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/1.jpg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/4.jpg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="new">new</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <!-- <span class="old">20.000.000đ</span> -->
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/2.jpeg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <!-- <span class="sale">-20%</span> -->
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <!-- <span class="old">20.000.000đ</span> -->
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="${root }/frontend/sanpham.html" class="image">
-                                            <img src="${root }/frontend/img/products/7.jpg" class="fit-img zoom-img">
-                                        </a>
-                                        <span class="badges">
-                                            <span class="sale">-20%</span>
-                                        </span>
-                                    </div>
-                                    <div class="content">
-                                        <a href="${root }/frontend/sanpham.html" class="content-link">
-                                            <h5 class="title">Chó mèo</h5>
-                                        </a>
-                                        <span class="price">
-                                            <span class="old">20.000.000đ</span>
-                                            <span class="new">15.000.000đ</span>
-                                        </span>
-                                        <span class="symbol">
-                                            <a href="#"><i class='bx bx-heart'></i></a>
-                                            <a href="#"><i class='bx bx-cart'></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                        </c:forEach>
                     </div>
                     <div class="main__products-more">
                         <a href="${root }/frontend/danhmuc.html">Xem thêm</a>
@@ -719,6 +456,36 @@
     </div>
     <%-- JS --%>
     <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
+    <!-- Add to cart -->
+	<script type="text/javascript">
+		addToCart = function(_productId, _quantity, _productName) {		
+			alert("Thêm "  + _quantity + " sản phẩm '" + _productName + "' vào giỏ hàng ");
+			let data = {
+				id: _productId, //lay theo id
+				quantity: _quantity,
+				name: _productName,
+			};
+				
+			//$ === jQuery
+			jQuery.ajax({
+				url : "/add-to-cart",
+				type : "POST",
+				contentType: "application/json",
+				data : JSON.stringify(data),
+				dataType : "json", //Kieu du lieu tra ve tu controller la json
+				
+				success : function(jsonResult) {
+					alert(jsonResult.code + ": " + jsonResult.message);
+					let totalProducts = jsonResult.totalCartProducts;
+					$("#totalCartProducts").html(totalProducts);
+				},
+				
+				error : function(jqXhr, textStatus, errorMessage) {
+					alert(jsonResult.code + ': Đã có lỗi xay ra...!')
+				},
+			});
+		}
+	</script>
 
 </body>
 

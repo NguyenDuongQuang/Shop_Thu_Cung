@@ -6,3 +6,4 @@
 <link href="${resource}/backend/dist/css/style.min.css" rel="stylesheet">
 <link href="${resource}/backend/dist/css/simplePagination.css" rel="stylesheet">
 <link href="${resource}/backend/scss/style.scss" rel="stylesheet">
+

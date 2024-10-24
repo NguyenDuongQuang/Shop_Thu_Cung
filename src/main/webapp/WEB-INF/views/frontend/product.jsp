@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,22 +80,12 @@
                                         <div class="product__detail-img">
                                             <div class="swiper myProduct">
                                                 <div class="swiper-wrapper">
+                                                <c:forEach items="${productImages }" var="image">
                                                     <div class="swiper-slide">
-                                                        <img src="./img/products/4.jpeg" alt=""
+                                                        <img src="${root }/UploadFiles/${image.path }" alt="click here"
                                                             class="swiper__product-img">
                                                     </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="./img/products/2.jpeg" alt=""
-                                                            class="swiper__product-img">
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="./img/products/8.jpeg" alt=""
-                                                            class="swiper__product-img">
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="./img/products/7.jpeg" alt=""
-                                                            class="swiper__product-img">
-                                                    </div>
+                                                </c:forEach>
                                                 </div>
                                                 <!-- <div class="swiper-button-next"></div>
                                                 <div class="swiper-button-prev"></div> -->
@@ -103,14 +96,16 @@
                                     <div class="col-12 col-lg-7">
                                         <div class="product__detail-summery">
                                             <div class="product__header mb-10">
-                                                <h2 class="product__header-title">SAMOYED TRẮNG XINH</h2>
+                                                <h2 class="product__header-title">${product.name }</h2>
                                             </div>
                                             <div class="product__price mb-10">
-                                                <span class="curr__price">15.000.000đ</span>
-                                                <span class="old__price">20.000.000đ</span>
+                                                <span class="curr__price"><fmt:formatNumber
+																value="${product.salePrice }" minFractionDigits="0"></fmt:formatNumber>đ</span>
+                                                <span class="old__price"><fmt:formatNumber
+																value="${product.price }" minFractionDigits="0"></fmt:formatNumber>đ</span>
                                             </div>
                                             <div class="product__code mb-10">
-                                                <span>Mã đơn hàng: ABC123</span>
+                                                
                                             </div>
                                             <div class="product__inventroy mb-10">
                                                 <span class="inventroy-title">Tình trạng: </span>
@@ -121,12 +116,12 @@
                                                     Số lượng:
                                                 </span>
                                                 <div class="quantity__plus mb-10">
-                                                    <input type="number" name="" id="">
+                                                    <input type="number" name="quantity" id="quantity" value="0">
                                                 </div>
                                             </div>
                                             <div class="product__cart-button">
                                                 <div class="add__to__cart">
-                                                    <a href="#" class="add-cart-link">Add to cart</a>
+                                                    <a class="add-cart-link" onclick="addToCart(${product.id },'${product.name }')">Add to cart</a>
                                                 </div>
                                                 <a href="#" class="add-cart-heart">
                                                     <i class='bx bx-heart'></i>
@@ -411,7 +406,36 @@
         
     </div>
     <jsp:include page="/WEB-INF/views/frontend/layout/js.jsp"></jsp:include>
-
+    <!-- Add to cart -->
+	<script type="text/javascript">
+		addToCart = function(_productId, productName) {		
+			alert("Thêm "  + jQuery("#quantity").val() + " sản phẩm '" + productName + "' vào giỏ hàng ");
+			let data = {
+				id: _productId, //lay theo id
+				quantity: jQuery("#quantity").val(),
+				name: _productName,
+			};
+				
+			//$ === jQuery
+			jQuery.ajax({
+				url : "/add-to-cart",
+				type : "POST",
+				contentType: "application/json",
+				data : JSON.stringify(data),
+				dataType : "json", //Kieu du lieu tra ve tu controller la json
+				
+				success : function(jsonResult) {
+					alert(jsonResult.code + ": " + jsonResult.message);
+					let totalProducts = jsonResult.totalCartProducts;
+					$("#totalCartProducts").html(totalProducts);
+				},
+				
+				error : function(jqXhr, textStatus, errorMessage) {
+					alert(jsonResult.code + ': Đã có lỗi xay ra...!')
+				},
+			});
+		}
+	</script>
 </body>
 
 </html>

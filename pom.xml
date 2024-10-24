@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>vn.devpro</groupId>
-  <artifactId>shop_thu_cung</artifactId>
+  <artifactId>javaweb30</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>javaweb30 Maven Webapp</name>
@@ -67,12 +67,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<!-- <version>8.0.33</version>  -->
 		</dependency>
-		
-		<dependency>
-    <groupId>com.microsoft.sqlserver</groupId>
-    <artifactId>mssql-jdbc</artifactId>
-    <version>9.4.1.jre16</version>
-</dependency>
   </dependencies>
   <build>
     <finalName>javaweb30</finalName>

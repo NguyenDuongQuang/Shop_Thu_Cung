@@ -12,19 +12,131 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import vn.devpro.javaweb30.dto.Jw30Contant;
-import vn.devpro.javaweb30.dto.seacrhModels;
+import vn.devpro.javaweb30.dto.SearchModel;
+import vn.devpro.javaweb30.model.Category;
 import vn.devpro.javaweb30.model.Product;
 import vn.devpro.javaweb30.model.ProductImage;
 
 @Service
-public class ProductService extends BaseService<Product> implements Jw30Contant {
-
+public class ProductService extends BaseService<Product> implements Jw30Contant{
+	
 	@Override
 	public Class<Product> clazz() {
 		return Product.class;
 	}
 
-	public List<Product> search(seacrhModels searchModel) {
+	public List<Product> findAllActive() {
+		String sql = "SELECT * FROM tbl_product WHERE status = 1";
+		return super.executeNativeSql(sql);
+	}
+	
+	public boolean isExistFile(MultipartFile file) {
+		if (file != null && !StringUtils.isEmpty(file.getOriginalFilename())) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isExistFiles(MultipartFile[] files) {
+		if (files != null && files.length > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Transactional
+	public Product saveProduct(Product product, MultipartFile avatarFile, MultipartFile[] imageFiles) throws IOException {
+		// Kiểm tra xem có upload avatar không?
+		if (isExistFile(avatarFile)) {// có upload
+			// Lưu file vào thư mục Product/Avatar
+			String path = FOLDER_UPLOAD + "Product/Avatar/" + avatarFile.getOriginalFilename();
+			
+			File file = new File(path);
+			avatarFile.transferTo(file);
+			
+			//Lưu đường dẫn vào DB
+			product.setAvatar("Product/Avatar/" + avatarFile.getOriginalFilename());
+		}
+		
+		//Kiểm tra xem có upload images không?
+		if (isExistFiles(imageFiles)) {//Có upload
+			for (MultipartFile image : imageFiles) {
+				if (isExistFile(image)) {
+					//Lưu file vào thư muc
+					String path = FOLDER_UPLOAD + "Product/Avatar/" + image.getOriginalFilename();
+					
+					File file = new File(path);
+					image.transferTo(file);
+					//Lưu đường dẫn vào bản tbl_product_image
+					ProductImage productImage = new ProductImage();
+					productImage.setPath("Product/Avatar/" + image.getOriginalFilename());
+					productImage.setTitle(image.getOriginalFilename());
+					productImage.setCreateDate(new Date());
+					productImage.setStatus(true);
+					
+					productImage.setProduct(product);
+					product.addRelationalProductImage(productImage);
+				}
+			}
+		}
+		if (product.getPrice() == null) {
+			product.setPrice(BigDecimal.ZERO);
+		}
+		if (product.getSalePrice() == null) {
+			product.setSalePrice(BigDecimal.ZERO);
+		}
+		return saveOrUpdate(product);
+	}
+	@Transactional
+	public Product saveEditProduct(Product product, MultipartFile avatarFile, MultipartFile[] imageFiles) throws IOException {
+		// Kiểm tra xem có upload avatar không?
+		if (isExistFile(avatarFile)) {// có upload
+			// Kiểm tra xem có avatar cũ không
+			if (product.getAvatar() != null && !StringUtils.isEmpty(product.getAvatar())) {
+				//Có thì phải xóa avatar cũ
+				String path = FOLDER_UPLOAD + product.getAvatar();
+				File file = new File(path);
+				file.delete();
+			}
+			// Lưu file mới
+			product.setAvatar("Product/Avatar/" + avatarFile.getOriginalFilename());
+			String path = FOLDER_UPLOAD + "Product/Avatar/" + avatarFile.getOriginalFilename();
+			
+			File file = new File(path);
+			avatarFile.transferTo(file);
+		}
+		
+		//Kiểm tra xem có upload images không?
+		if (isExistFiles(imageFiles)) {//Có upload
+			for (MultipartFile image : imageFiles) {
+				if (isExistFile(image)) {
+					//Lưu file vào thư muc
+					String path = FOLDER_UPLOAD + "Product/Avatar/" + image.getOriginalFilename();
+					
+					File file = new File(path);
+					image.transferTo(file);
+					//Lưu đường dẫn vào bản tbl_product_image
+					ProductImage productImage = new ProductImage();
+					productImage.setPath("Product/Avatar/" + image.getOriginalFilename());
+					productImage.setTitle(image.getOriginalFilename());
+					productImage.setCreateDate(new Date());
+					productImage.setStatus(true);
+					
+					productImage.setProduct(product);
+					product.addRelationalProductImage(productImage);
+				}
+			}
+		}
+		if (product.getPrice() == null) {
+			product.setPrice(BigDecimal.ZERO);
+		}
+		if (product.getSalePrice() == null) {
+			product.setSalePrice(BigDecimal.ZERO);
+		}
+		return saveOrUpdate(product);
+	}
+	
+	public List<Product> search(SearchModel searchModel) {
 		String sql = "SELECT * FROM tbl_product p WHERE 1=1";
 		// Tìm theo status
 		if (searchModel.getStatus() != 2) {
@@ -51,114 +163,4 @@ public class ProductService extends BaseService<Product> implements Jw30Contant 
 		
 		return super.executeNativeSql(sql);
 	}
-
-	public boolean isExistFile(MultipartFile file) {
-		if (file != null && !StringUtils.isEmpty(file.getOriginalFilename())) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean isExistFiles(MultipartFile[] files) {
-		if (files != null && files.length > 0) {
-			return true;
-		}
-		return false;
-	}
-
-	@Transactional
-	public Product saveProduct(Product product, MultipartFile avatarFile, MultipartFile[] imageFiles)
-			throws IOException {
-		// Kiểm tra xem có upload avatar không?
-		if (isExistFile(avatarFile)) {// có upload
-			// Lưu file vào thư mục Product/Avatar
-			String path = FOLDER_UPLOAD + "Product/Avatar/" + avatarFile.getOriginalFilename();
-
-			File file = new File(path);
-			avatarFile.transferTo(file);
-
-			// Lưu đường dẫn vào DB
-			product.setAvatar("Product/Avatar/" + avatarFile.getOriginalFilename());
-		}
-
-		// Kiểm tra xem có upload images không?
-		if (isExistFiles(imageFiles)) {// Có upload
-			for (MultipartFile image : imageFiles) {
-				if (isExistFile(image)) {
-					// Lưu file vào thư muc
-					String path = FOLDER_UPLOAD + "Product/Avatar/" + image.getOriginalFilename();
-
-					File file = new File(path);
-					image.transferTo(file);
-					// Lưu đường dẫn vào bản tbl_product_image
-					ProductImage productImage = new ProductImage();
-					productImage.setPath("Product/Avatar/" + image.getOriginalFilename());
-					productImage.setTitle(image.getOriginalFilename());
-					productImage.setCreateDate(new Date());
-					productImage.setStatus(true);
-
-					productImage.setProduct(product);
-					product.addRelationalProductImage(productImage);
-				}
-			}
-		}
-		if (product.getPrice() == null) {
-			product.setPrice(BigDecimal.ZERO);
-		}
-		if (product.getSalePrice() == null) {
-			product.setSalePrice(BigDecimal.ZERO);
-		}
-		return saveOrUpdate(product);
-	}
-
-	@Transactional
-	public Product saveEditProduct(Product product, MultipartFile avatarFile, MultipartFile[] imageFiles)
-			throws IOException {
-		// Kiểm tra xem có upload avatar không?
-		if (isExistFile(avatarFile)) {// có upload
-			// Kiểm tra xem có avatar cũ không
-			if (product.getAvatar() != null && !StringUtils.isEmpty(product.getAvatar())) {
-				// Có thì phải xóa avatar cũ
-				String path = FOLDER_UPLOAD + product.getAvatar();
-				File file = new File(path);
-				file.delete();
-			}
-			// Lưu file mới
-			product.setAvatar("Product/Avatar/" + avatarFile.getOriginalFilename());
-			String path = FOLDER_UPLOAD + "Product/Avatar/" + avatarFile.getOriginalFilename();
-
-			File file = new File(path);
-			avatarFile.transferTo(file);
-		}
-
-		// Kiểm tra xem có upload images không?
-		if (isExistFiles(imageFiles)) {// Có upload
-			for (MultipartFile image : imageFiles) {
-				if (isExistFile(image)) {
-					// Lưu file vào thư muc
-					String path = FOLDER_UPLOAD + "Product/Avatar/" + image.getOriginalFilename();
-
-					File file = new File(path);
-					image.transferTo(file);
-					// Lưu đường dẫn vào bản tbl_product_image
-					ProductImage productImage = new ProductImage();
-					productImage.setPath("Product/Avatar/" + image.getOriginalFilename());
-					productImage.setTitle(image.getOriginalFilename());
-					productImage.setCreateDate(new Date());
-					productImage.setStatus(true);
-
-					productImage.setProduct(product);
-					product.addRelationalProductImage(productImage);
-				}
-			}
-		}
-		if (product.getPrice() == null) {
-			product.setPrice(BigDecimal.ZERO);
-		}
-		if (product.getSalePrice() == null) {
-			product.setSalePrice(BigDecimal.ZERO);
-		}
-		return saveOrUpdate(product);
-	}
-
 }
