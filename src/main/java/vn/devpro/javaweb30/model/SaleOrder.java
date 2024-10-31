@@ -1,13 +1,21 @@
 package vn.devpro.javaweb30.model;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import antlr.collections.List;
 
 @Entity
 @Table(name = "tbl_sale_order")
@@ -17,7 +25,7 @@ public class SaleOrder extends BaseModel{
 	private String code;
 	
 	@Column(name = "total", nullable = true)
-	private double total;
+	private BigDecimal total;
 	
 	@Column(name = "customer_name",length = 300, nullable = true)
 	private String customerName;
@@ -32,90 +40,109 @@ public class SaleOrder extends BaseModel{
 	private String customerAddress;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id",referencedColumnName = "id")
 	private User user;
 	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinTable(name = "tbl_sale_order_product", joinColumns = @JoinColumn(name = "sale_order"),
-//	inverseJoinColumns = @JoinColumn(name = "product_id"))
-//	private List<Product> products = new ArrayList<Product>();
+	@OneToMany(cascade = CascadeType.ALL, 
+			fetch = FetchType.LAZY, mappedBy = "sale_order")
+	private java.util.List<SaleOrderProduct> saleOrderProducts = new ArrayList<SaleOrderProduct>();
+
+
+
+	public void removeRelationalSaleOrderProduct(SaleOrderProduct saleOrderProduct) {
+		saleOrderProducts.remove(saleOrderProduct);
+		saleOrderProduct.setSaleOrder(this);
+	}
+
+	public SaleOrder(String code, BigDecimal total, String customerName, String customerMobile, String customerEmail,
+			String customerAddress, User user, java.util.List<SaleOrderProduct> saleOrderProducts) {
+		super();
+		this.code = code;
+		this.total = total;
+		this.customerName = customerName;
+		this.customerMobile = customerMobile;
+		this.customerEmail = customerEmail;
+		this.customerAddress = customerAddress;
+		this.user = user;
+		this.saleOrderProducts = saleOrderProducts;
+	}
 
 	public SaleOrder() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-public SaleOrder(Integer id, Date createDate, Date updateDate, Boolean status, String code, double total,
-		String customerName, String customerMobile, String customerEmail, String customerAddress, User user) {
-	super(id, createDate, updateDate, status);
-	this.code = code;
-	this.total = total;
-	this.customerName = customerName;
-	this.customerMobile = customerMobile;
-	this.customerEmail = customerEmail;
-	this.customerAddress = customerAddress;
-	this.user = user;
-}
+	public SaleOrder(Integer id, Date createDate, Date updateDate, Boolean status) {
+		super(id, createDate, updateDate, status);
+		// TODO Auto-generated constructor stub
+	}
 
-public String getCode() {
-	return code;
-}
+	public String getCode() {
+		return code;
+	}
 
-public void setCode(String code) {
-	this.code = code;
-}
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-public double getTotal() {
-	return total;
-}
+	public BigDecimal getTotal() {
+		return total;
+	}
 
-public void setTotal(double total) {
-	this.total = total;
-}
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 
-public String getCustomerName() {
-	return customerName;
-}
+	public String getCustomerName() {
+		return customerName;
+	}
 
-public void setCustomerName(String customerName) {
-	this.customerName = customerName;
-}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 
-public String getCustomerMobile() {
-	return customerMobile;
-}
+	public String getCustomerMobile() {
+		return customerMobile;
+	}
 
-public void setCustomerMobile(String customerMobile) {
-	this.customerMobile = customerMobile;
-}
+	public void setCustomerMobile(String customerMobile) {
+		this.customerMobile = customerMobile;
+	}
 
-public String getCustomerEmail() {
-	return customerEmail;
-}
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
 
-public void setCustomerEmail(String customerEmail) {
-	this.customerEmail = customerEmail;
-}
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
 
-public String getCustomerAddress() {
-	return customerAddress;
-}
+	public String getCustomerAddress() {
+		return customerAddress;
+	}
 
-public void setCustomerAddress(String customerAddress) {
-	this.customerAddress = customerAddress;
-}
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
+	}
 
-public User getUser() {
-	return user;
-}
+	public User getUser() {
+		return user;
+	}
 
-public void setUser(User user) {
-	this.user = user;
-}
-	
-	
-	
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-	
-	
-	
+
+	public void setSaleOrderProducts(java.util.List<SaleOrderProduct> saleOrderProducts) {
+		this.saleOrderProducts = saleOrderProducts;
+	}
+
+	public void addRelationalSaleOrderProduct(SaleOrderProduct saleOrderProduct) {
+		// TODO Auto-generated method stub
+		saleOrderProducts.add(saleOrderProduct);
+		saleOrderProduct.setSaleOrder(this);
+		
+	}
+
 }

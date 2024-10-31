@@ -46,6 +46,10 @@ public class Product extends BaseModel{
 	@OneToMany(cascade = CascadeType.ALL, 
 			fetch = FetchType.LAZY, mappedBy = "product")
 	private List<ProductImage> productImages = new ArrayList<ProductImage>();
+	
+	@OneToMany(cascade = CascadeType.ALL, 
+			fetch = FetchType.LAZY, mappedBy = "product")
+	private List<SaleOrderProduct> saleOrderProducts = new ArrayList<SaleOrderProduct>();
 
 	// Methods add and remove elements in relational product list
 	public void addRelationalProductImage(ProductImage productImage) {

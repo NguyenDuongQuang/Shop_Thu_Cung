@@ -16,7 +16,7 @@
 	<meta name="author" content="">
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16"
-		href="${classpath}/admin/assets/images/favicon.png">
+		href="${root}/admin/assets/images/favicon.png">
 	<title>${projectTitle }</title>
 	
 	<!-- variables -->
@@ -78,7 +78,7 @@
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
 				<!-- basic table -->
-				<form action="${classpath }/admin/order-list" method="get">
+				<form action="${root }/admin/order-list" method="get">
 					
 						<div class="row">
 							<div class="col-12">

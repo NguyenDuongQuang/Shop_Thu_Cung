@@ -4,7 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 
 @Entity
 @Table(name = "tbl_sale_order_product")
@@ -17,10 +22,57 @@ public class SaleOrderProduct extends BaseModel{
 	
 	@Column(name = "description", length = 500, nullable = true)
 	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="sale_order_id",referencedColumnName = "id")
+	private SaleOrder saleOrder;
 
+	@ManyToOne
+	@JoinColumn(name="product_id",referencedColumnName = "id")
+	private Product product;
+
+	
 	public SaleOrderProduct() {
 		super();
 	}
+	
+	
+
+	public SaleOrder getSaleOrder() {
+		return saleOrder;
+	}
+
+
+
+	public void setSaleOrder(SaleOrder saleOrder) {
+		this.saleOrder = saleOrder;
+	}
+
+
+
+	public Product getProduct() {
+		return product;
+	}
+
+
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+
+
+	public SaleOrderProduct(String productName, int quantity, String description, SaleOrder saleOrder,
+			Product product) {
+		super();
+		this.productName = productName;
+		this.quantity = quantity;
+		this.description = description;
+		this.saleOrder = saleOrder;
+		this.product = product;
+	}
+
+
 
 	public SaleOrderProduct(Integer id, Date createDate, Date updateDate, Boolean status, String productName,
 			int quantity, String description) {
@@ -53,6 +105,8 @@ public class SaleOrderProduct extends BaseModel{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	
 	
 	
 }
