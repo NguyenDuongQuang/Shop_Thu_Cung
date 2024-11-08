@@ -42,30 +42,6 @@ public class SaleOrder extends BaseModel{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id",referencedColumnName = "id")
 	private User user;
-	
-	@OneToMany(cascade = CascadeType.ALL, 
-			fetch = FetchType.LAZY, mappedBy = "sale_order")
-	private java.util.List<SaleOrderProduct> saleOrderProducts = new ArrayList<SaleOrderProduct>();
-
-
-
-	public void removeRelationalSaleOrderProduct(SaleOrderProduct saleOrderProduct) {
-		saleOrderProducts.remove(saleOrderProduct);
-		saleOrderProduct.setSaleOrder(this);
-	}
-
-	public SaleOrder(String code, BigDecimal total, String customerName, String customerMobile, String customerEmail,
-			String customerAddress, User user, java.util.List<SaleOrderProduct> saleOrderProducts) {
-		super();
-		this.code = code;
-		this.total = total;
-		this.customerName = customerName;
-		this.customerMobile = customerMobile;
-		this.customerEmail = customerEmail;
-		this.customerAddress = customerAddress;
-		this.user = user;
-		this.saleOrderProducts = saleOrderProducts;
-	}
 
 	public SaleOrder() {
 		super();
@@ -75,6 +51,18 @@ public class SaleOrder extends BaseModel{
 	public SaleOrder(Integer id, Date createDate, Date updateDate, Boolean status) {
 		super(id, createDate, updateDate, status);
 		// TODO Auto-generated constructor stub
+	}
+
+	public SaleOrder(String code, BigDecimal total, String customerName, String customerMobile, String customerEmail,
+			String customerAddress, User user) {
+		super();
+		this.code = code;
+		this.total = total;
+		this.customerName = customerName;
+		this.customerMobile = customerMobile;
+		this.customerEmail = customerEmail;
+		this.customerAddress = customerAddress;
+		this.user = user;
 	}
 
 	public String getCode() {
@@ -132,17 +120,6 @@ public class SaleOrder extends BaseModel{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-	public void setSaleOrderProducts(java.util.List<SaleOrderProduct> saleOrderProducts) {
-		this.saleOrderProducts = saleOrderProducts;
-	}
-
-	public void addRelationalSaleOrderProduct(SaleOrderProduct saleOrderProduct) {
-		// TODO Auto-generated method stub
-		saleOrderProducts.add(saleOrderProduct);
-		saleOrderProduct.setSaleOrder(this);
-		
-	}
+	
 
 }

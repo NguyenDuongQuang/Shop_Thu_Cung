@@ -14,9 +14,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 @Table(name = "tbl_role")
-public class Role extends BaseModel{
+public class Role extends BaseModel implements GrantedAuthority{
 	@Column(name = "name", length = 200, nullable = true)
 	private String name;
 	
@@ -100,6 +102,12 @@ public class Role extends BaseModel{
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+
+	@Override
+	public String getAuthority() {
+		return this.name;
 	}
 
 

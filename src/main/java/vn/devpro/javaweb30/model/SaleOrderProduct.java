@@ -23,9 +23,9 @@ public class SaleOrderProduct extends BaseModel{
 	@Column(name = "description", length = 500, nullable = true)
 	private String description;
 	
-	@ManyToOne
-	@JoinColumn(name="sale_order_id",referencedColumnName = "id")
-	private SaleOrder saleOrder;
+//	@ManyToOne
+//	@JoinColumn(name="sale_order_id",referencedColumnName = "id")
+//	private SaleOrder saleOrder;
 
 	@ManyToOne
 	@JoinColumn(name="product_id",referencedColumnName = "id")
@@ -38,15 +38,15 @@ public class SaleOrderProduct extends BaseModel{
 	
 	
 
-	public SaleOrder getSaleOrder() {
-		return saleOrder;
-	}
-
-
-
-	public void setSaleOrder(SaleOrder saleOrder) {
-		this.saleOrder = saleOrder;
-	}
+//	public SaleOrder getSaleOrder() {
+//		return saleOrder;
+//	}
+//
+//
+//
+//	public void setSaleOrder(SaleOrder saleOrder) {
+//		this.saleOrder = saleOrder;
+//	}
 
 
 
@@ -62,15 +62,15 @@ public class SaleOrderProduct extends BaseModel{
 
 
 
-	public SaleOrderProduct(String productName, int quantity, String description, SaleOrder saleOrder,
-			Product product) {
-		super();
-		this.productName = productName;
-		this.quantity = quantity;
-		this.description = description;
-		this.saleOrder = saleOrder;
-		this.product = product;
-	}
+//	public SaleOrderProduct(String productName, int quantity, String description, SaleOrder saleOrder,
+//			Product product) {
+//		super();
+//		this.productName = productName;
+//		this.quantity = quantity;
+//		this.description = description;
+//		this.saleOrder = saleOrder;
+//		this.product = product;
+//	}
 
 
 
